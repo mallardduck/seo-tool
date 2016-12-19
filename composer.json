@@ -6,7 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "laravel/framework": "5.3.*",
+        "pusher/pusher-php-server": "^2.6",
+        "spatie/crawler": "^2.0",
+        "spatie/laravel-blade-javascript": "^1.0",
+        "spatie/laravel-fractal": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -166,6 +166,9 @@ return [
         /*
          * Package Service Providers...
          */
+        Spatie\BladeJavaScript\BladeJavaScriptServiceProvider::class,
+        Spatie\Fractal\FractalServiceProvider::class,
+
 
         //
 

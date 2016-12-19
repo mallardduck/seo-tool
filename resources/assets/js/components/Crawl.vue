@@ -36,7 +36,7 @@
 
         created() {
 
-    window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (e) => {
+            window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (e) => {
                 this.urls.unshift({
                     url: e.url,
                     responseCode: e.responseCode,

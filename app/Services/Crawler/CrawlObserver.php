@@ -3,6 +3,7 @@
 namespace App\Services\Crawler;
 
 use App\Events\UrlHasBeenCrawled;
+use App\Services\ResponseAnalysis;
 use Spatie\Crawler\Url;
 
 class CrawlObserver implements \Spatie\Crawler\CrawlObserver
@@ -31,8 +32,9 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
      */
     public function hasBeenCrawled(Url $url, $response, Url $foundOnUrl = null)
     {
-        echo 'yup';
-        event(new UrlHasBeenCrawled($url, $response->getStatusCode()));
+        $responseAnalysis = new ResponseAnalysis($response);
+
+        event(new UrlHasBeenCrawled($url, $response->getStatusCode(), $responseAnalysis->getTitle()));
     }
 
     /**

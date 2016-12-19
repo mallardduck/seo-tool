@@ -3,15 +3,17 @@
         <table>
             <tr>
                 <thead>
-                <th>Url</th>
-                <th>Status code</th>
+                    <th>Status code</th>
+                    <th>Url</th>
+                    <th>Title</th>
                 <tr/>
                 </thead>
-                <tbody>
-                <tr v-for="url in urls">
-                    <td>{{ url.url }}</td>
-                    <td>{{ url.responseCode }}</td>
-                <tr>
+                    <tbody>
+                        <tr v-for="url in urls">
+                            <td>{{ url.responseCode }}</td>
+                            <td>{{ url.url }}</td>
+                            <td>{{ url.title }}</td>
+                        <tr>
                 </tbody>
 
         </table>
@@ -32,11 +34,14 @@
                 }
         },
 
-
         created() {
 
     window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (e) => {
-                this.urls.unshift({ url: e.url, responseCode: e.responseCode});
+                this.urls.unshift({
+                    url: e.url,
+                    responseCode: e.responseCode,
+                    title: e.title,
+                });
             });
 
         }

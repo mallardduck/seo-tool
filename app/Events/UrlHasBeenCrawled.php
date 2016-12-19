@@ -6,23 +6,22 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class UrlHasBeenCrawled implements ShouldBroadcast
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $url;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $responseCode;
 
-    public function __construct(string $url, string $responseCode = '')
-    {
-        echo 'yup event';
+    /** @var string */
+    public $title;
 
+    public function __construct(string $url, string $responseCode = '', string $title = '')
+    {
         $this->url = $url;
 
         $this->responseCode = $responseCode;
+
+        $this->title = $title;
     }
 
     /**

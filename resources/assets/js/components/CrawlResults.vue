@@ -1,5 +1,8 @@
 <template>
     <div>
+
+        <crawlStatus></crawlStatus>
+
         <table>
             <tr>
                 <thead>
@@ -10,7 +13,7 @@
                 </thead>
                     <tbody>
                         <tr v-for="url in urls">
-                            <td>{{ url.responseCode }}</td>
+                            <td>{{ url.statusCode }}</td>
                             <td>{{ url.url }}</td>
                             <td>{{ url.title }}</td>
                         <tr>
@@ -23,10 +26,6 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        },
-
         data() {
             return {
                     urls: [

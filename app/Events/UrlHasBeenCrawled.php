@@ -2,26 +2,23 @@
 
 namespace App\Events;
 
+use App\Services\CrawledUrlReport;
+use App\Services\CrawledUrlReportTransformer;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class UrlHasBeenCrawled implements ShouldBroadcast
 {
-    /** @var string */
-    public $url;
+    /** @var \App\Services\CrawledUrlReport */
+    protected $crawledUrlReport;
 
-    /** @var string */
-    public $responseCode;
-
-    /** @var string */
-    public $title;
-
-    public function __construct(string $url, string $responseCode = '', string $title = '')
+    public function __construct(CrawledUrlReport $crawledUrlReport)
     {
-        $this->url = $url;
+        $this->crawledUrlReport = $crawledUrlReport;
+    }
 
-        $this->responseCode = $responseCode;
-
-        $this->title = $title;
+    public function broadcastWith(): array
+    {
+        return fractal($this->crawledUrlReport, new CrawledUrlReportTransformer());
     }
 
     /**

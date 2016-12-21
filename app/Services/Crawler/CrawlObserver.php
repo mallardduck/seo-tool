@@ -32,9 +32,9 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
      */
     public function hasBeenCrawled(Url $url, $response, Url $foundOnUrl = null)
     {
-        $responseAnalysis = new ResponseAnalysis($response);
+        $crawledUrlReport = new CrawledUrlReport($url, $response, $foundOnUrl);
 
-        event(new UrlHasBeenCrawled($url, $response->getStatusCode(), $responseAnalysis->getTitle()));
+        event(new UrlHasBeenCrawled($crawledUrlReport));
     }
 
     /**

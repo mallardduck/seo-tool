@@ -13,7 +13,8 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('Crawl', require('./components/Crawl.vue'));
+Vue.component('CrawlStatus', require('./components/CrawlStatus.vue'));
+Vue.component('CrawlResults', require('./components/CrawlResults.vue'));
 
 const app = new Vue({
     el: '#app'

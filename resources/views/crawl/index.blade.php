@@ -5,6 +5,6 @@
     @javascript(compact('pusherKey'))
 
     <div id="app">
-        <crawl></crawl>
+        <crawl-results></crawl-results>
     </div>
 @endsection

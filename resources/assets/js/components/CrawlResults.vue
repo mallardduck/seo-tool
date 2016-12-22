@@ -3,48 +3,51 @@
 
         <crawlStatus></crawlStatus>
 
+        <span>Amount of urls crawled: {{ crawlCount }}</span>
+
         <table>
             <tr>
-                <thead>
-                    <th>Status code</th>
-                    <th>Url</th>
-                    <th>Title</th>
-                <tr/>
-                </thead>
-                    <tbody>
-                        <tr v-for="url in urls">
-                            <td>{{ url.statusCode }}</td>
-                            <td>{{ url.url }}</td>
-                            <td>{{ url.title }}</td>
-                        <tr>
-                </tbody>
+                <td>Status code</td>
+                <td>Url</td>
+                <td>Title</td>
+            <tr/>
+
+            <tr v-for="crawledUrl in crawledUrls">
+                <td>{{ crawledUrl.statusCode }}</td>
+                <td>{{ crawledUrl.url }}</td>
+                <td>{{ crawledUrl.title }}</td>
+            <tr>
 
         </table>
-
     </div>
 </template>
 
 <script>
     export default {
-        data() {
-            return {
-                    urls: [
-                    ],
-                }
+        computed: {
+            crawlCount () {
+                return this.$store.state.crawledUrls.length
+            },
+
+            crawledUrls () {
+                return this.$store.state.crawledUrls
+            },
         },
 
-        created() {
-
-            window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (e) => {
-                this.urls.unshift({
-                    url: e.url,
-                    responseCode: e.responseCode,
-                    title: e.title,
-                });
-            });
+        methods: {
+            increment() {
+              this.$store.commit('increment');
+            },
 
         }
 
     }
+
+
+
+
+
+
+
 
 </script>

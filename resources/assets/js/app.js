@@ -13,9 +13,22 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import store from './store/index';
+import CrawledUrl from './store/CrawledUrl';
+
 Vue.component('CrawlStatus', require('./components/CrawlStatus.vue'));
 Vue.component('CrawlResults', require('./components/CrawlResults.vue'));
 
 const app = new Vue({
-    el: '#app'
+    store,
+    el: '#app',
+
+    created() {
+
+        window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (event) => {
+            console.log(event);
+            this.$store.commit('addCrawledUrl', new CrawledUrl(event.data));
+        });
+
+    },
 });

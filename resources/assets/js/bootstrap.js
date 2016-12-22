@@ -1,4 +1,5 @@
 
+
 window._ = require('lodash');
 
 /**
@@ -18,6 +19,8 @@ require('bootstrap-sass');
 
 window.Vue = require('vue');
 require('vue-resource');
+
+
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -39,7 +42,9 @@ Vue.http.interceptors.push((request, next) => {
 
 import Echo from "laravel-echo"
 
+
 window.Echo = new Echo({
      broadcaster: 'pusher',
      key: window.pusherKey
 });
+

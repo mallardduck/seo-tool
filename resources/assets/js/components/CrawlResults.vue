@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <crawlStatus></crawlStatus>
+        <crawlControls></crawlControls>
 
         <span>Amount of urls crawled: {{ crawlCount }}</span>
 

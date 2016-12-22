@@ -6,11 +6,11 @@ use League\Fractal\TransformerAbstract;
 
 class CrawledUrlReportTransformer extends TransformerAbstract
 {
-    public function toArray(CrawledUrlReport $crawledUrlReport): array
+    public function transform(CrawledUrlReport $crawledUrlReport): array
     {
         return [
             'statusCode' => $crawledUrlReport->getStatusCode(),
-            'url' => $crawledUrlReport->url,
+            'url' => (string)$crawledUrlReport->url,
             'title' => $crawledUrlReport->getTitle(),
         ];
     }

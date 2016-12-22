@@ -33,11 +33,27 @@ class CrawledUrlReport
 
     public function getStatusCode()
     {
-        $this->response->getStatusCode();
+        return $this->response->getStatusCode();
     }
 
     public function getTitle(): string
     {
-        return $this->response ? $this->dom->filter('head > title')->html() : '';
+        if ($this->getResponseBodyLength() === 0) {
+            echo 'no title';
+            return '';
+        }
+
+        return $this->dom->filter('head > title')->html();
     }
+
+    public function getResponseBodyLength()
+    {
+        if (is_null($this->response)) {
+            return 0;
+        }
+
+        return strlen((string)$this->response->getBody());
+    }
+
+
 }

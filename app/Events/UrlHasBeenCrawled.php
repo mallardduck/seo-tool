@@ -18,7 +18,7 @@ class UrlHasBeenCrawled implements ShouldBroadcast
 
     public function broadcastWith(): array
     {
-        return fractal($this->crawledUrlReport, new CrawledUrlReportTransformer());
+        return fractal($this->crawledUrlReport, new CrawledUrlReportTransformer())->toArray();
     }
 
     /**

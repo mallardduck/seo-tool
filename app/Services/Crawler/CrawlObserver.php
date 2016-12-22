@@ -3,6 +3,7 @@
 namespace App\Services\Crawler;
 
 use App\Events\UrlHasBeenCrawled;
+use App\Services\CrawledUrlReport;
 use App\Services\ResponseAnalysis;
 use Spatie\Crawler\Url;
 

@@ -9,6 +9,10 @@ export default class CrawledUrl
     }
 
     get contentType() {
+        if (this.headers['Content-Type'] == undefined) {
+            return '';
+        }
+
         return this.headers['Content-Type'][0] || '';
     }
 

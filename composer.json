@@ -29,9 +29,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Tests\\": "app/"
+        }
     },
     "scripts": {
         "post-root-package-install": [

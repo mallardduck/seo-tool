@@ -10,30 +10,48 @@ use Symfony\Component\DomCrawler\Crawler as DomCrawler;
 class CrawledUrlReport
 {
     /** @var \Spatie\Crawler\Url */
-    public $url;
+    protected $url;
 
     /** @var null|\Psr\Http\Message\ResponseInterface */
-    public $response;
+    protected $response;
 
     /** @var string */
-    public $responseBody = '';
+    protected $responseBody = '';
 
     /** @var null|\Spatie\Crawler\Url */
-    public $foundOnUrl;
+    protected $foundOnUrl;
 
-    public function __construct(Url $url, ?ResponseInterface $response, ?Url $foundOnUrl)
+    public function __construct(Url $url, ?ResponseInterface $response, ?Url $foundOnUrl = null)
     {
         $this->url = $url;
 
         $this->response = $response;
 
-        $this->responseBody = (string)$response->getBody();
+        $this->responseBody = $response ? (string)$response->getBody() : '';
 
         $this->foundOnUrl = $foundOnUrl;
     }
 
-    public function getStatusCode()
+    public function getUrl(): string
     {
+        return (string)$this->url;
+    }
+
+    public function getFoundOnUrl(): string
+    {
+        if (! $this->foundOnUrl) {
+            return '';
+        }
+
+        return (string)$this->foundOnUrl;
+    }
+
+    public function getStatusCode(): ?int
+    {
+        if (! $this->response) {
+            return null;
+        }
+
         return $this->response->getStatusCode();
     }
 
@@ -45,6 +63,15 @@ class CrawledUrlReport
     public function getH1(): string
     {
         return $this->runDomQuery('H1');
+    }
+
+    public function getHeaders(): array
+    {
+        if (! $this->response) {
+            return [];
+        }
+
+        return $this->response->getHeaders();
     }
 
     public function getResponseBodyLength()

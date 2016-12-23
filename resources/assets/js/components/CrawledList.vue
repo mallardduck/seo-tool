@@ -9,6 +9,7 @@
                     <td>Url</td>
                     <td>Title</td>
                     <td>H1</td>
+                    <td>Content type</td>
                 <tr/>
 
                 <tr v-for="crawledUrl in crawledUrls">
@@ -16,6 +17,7 @@
                     <td>{{ crawledUrl.url }}</td>
                     <td>{{ crawledUrl.title }}</td>
                     <td>{{ crawledUrl.h1 }}</td>
+                    <td>TO DO</td>
                 <tr>
 
             </table>

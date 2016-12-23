@@ -12,6 +12,7 @@ class CrawledUrlReportTransformer extends TransformerAbstract
             'statusCode' => $crawledUrlReport->getStatusCode(),
             'url' => (string)$crawledUrlReport->url,
             'title' => $crawledUrlReport->getTitle(),
+            'h1' => $crawledUrlReport->getH1(),
         ];
     }
 }

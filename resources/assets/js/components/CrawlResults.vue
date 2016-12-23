@@ -13,12 +13,14 @@
                     <td>Status code</td>
                     <td>Url</td>
                     <td>Title</td>
+                    <td>H1</td>
                 <tr/>
 
                 <tr v-for="crawledUrl in crawledUrls">
                     <td>{{ crawledUrl.statusCode }}</td>
                     <td>{{ crawledUrl.url }}</td>
                     <td>{{ crawledUrl.title }}</td>
+                    <td>{{ crawledUrl.h1 }}</td>
                 <tr>
 
             </table>
@@ -55,6 +57,7 @@
         }
 
     }
+
 
 
 

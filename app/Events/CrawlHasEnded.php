@@ -2,8 +2,6 @@
 
 namespace App\Events;
 
-use App\Services\CrawledUrlReport;
-use App\Services\CrawledUrlReportTransformer;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class CrawlHasEnded implements ShouldBroadcast

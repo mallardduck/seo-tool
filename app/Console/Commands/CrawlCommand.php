@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Services\Crawler\CrawlObserver;
-use Illuminate\Console\Command;
 use Spatie\Crawler\Crawler;
+use Illuminate\Console\Command;
+use App\Services\Crawler\CrawlObserver;
 
 class CrawlCommand extends Command
 {

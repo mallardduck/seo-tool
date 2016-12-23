@@ -2,12 +2,11 @@
 
 namespace Tests\Unit;
 
+use Spatie\Crawler\Url;
+use GuzzleHttp\Psr7\Response;
 use App\Services\CrawledUrlReport;
 
-use GuzzleHttp\Psr7\Response;
-use Spatie\Crawler\Url;
-
-class CrawlUrlReportTest extends \PHPUnit_Framework_TestCase
+class CrawledUrlReportTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
     public function it_can_get_properties_of_a_successful_response()
@@ -17,7 +16,7 @@ class CrawlUrlReportTest extends \PHPUnit_Framework_TestCase
 
         $headers = ['Content-Type' => ['html/text']];
 
-        $response = new Response(200, ['Content-Type' => ['html/text']], file_get_contents(__DIR__ . '/fixtures/default.html'));
+        $response = new Response(200, ['Content-Type' => ['html/text']], file_get_contents(__DIR__.'/fixtures/default.html'));
 
         $crawledUrlReport = new CrawledUrlReport($url, $response, $foundOnUrl);
 

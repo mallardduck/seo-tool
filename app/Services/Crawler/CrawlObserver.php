@@ -2,15 +2,13 @@
 
 namespace App\Services\Crawler;
 
+use Spatie\Crawler\Url;
 use App\Events\CrawlHasEnded;
 use App\Events\UrlHasBeenCrawled;
 use App\Services\CrawledUrlReport;
-use App\Services\ResponseAnalysis;
-use Spatie\Crawler\Url;
 
 class CrawlObserver implements \Spatie\Crawler\CrawlObserver
 {
-
     /**
      * Called when the crawler will crawl the url.
      *
@@ -20,7 +18,6 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
      */
     public function willCrawl(Url $url)
     {
-
     }
 
     /**

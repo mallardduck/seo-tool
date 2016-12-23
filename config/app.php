@@ -170,7 +170,6 @@ return [
         Spatie\Fractal\FractalServiceProvider::class,
         Spatie\Tail\TailServiceProvider::class,
 
-
         //
 
         /*

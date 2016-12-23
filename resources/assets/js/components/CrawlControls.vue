@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-show="crawlerIsNotBusy">
         <input v-model="url" placeholder="https://example.com">
         <button @click="startCrawling">Start crawling</button>
     </div>
@@ -7,9 +7,11 @@
 
 <script>
 export default {
-    data:  {
-        url: ''
-    }
+    computed: {
+        crawlerIsNotBusy()  {
+           return this.$store.state.crawlStatus != 'busy';
+        }
+    },
 
     methods: {
         startCrawling()

@@ -16,7 +16,7 @@ require('./bootstrap');
 import store from './store/index';
 import CrawledUrl from './store/CrawledUrl';
 
-Vue.component('CrawlStatus', require('./components/CrawlStatus.vue'));
+Vue.component('CrawlControls', require('./components/CrawlControls.vue'));
 Vue.component('CrawlResults', require('./components/CrawlResults.vue'));
 
 const app = new Vue({
@@ -26,8 +26,11 @@ const app = new Vue({
     created() {
 
         window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (event) => {
-            console.log(event);
             this.$store.commit('addCrawledUrl', new CrawledUrl(event.data));
+        });
+
+        window.Echo.channel('crawler').listen('CrawlHasEnded', (event) => {
+            this.$store.commit('crawlHasEnded');
         });
 
     },

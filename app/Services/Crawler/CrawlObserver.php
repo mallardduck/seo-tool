@@ -2,6 +2,7 @@
 
 namespace App\Services\Crawler;
 
+use App\Events\CrawlHasEnded;
 use App\Events\UrlHasBeenCrawled;
 use App\Services\CrawledUrlReport;
 use App\Services\ResponseAnalysis;
@@ -45,6 +46,8 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
      */
     public function finishedCrawling()
     {
-        // TODO: Implement finishedCrawling() method.
+        \Log::info('crawl has ended');
+
+        event(new CrawlHasEnded());
     }
 }

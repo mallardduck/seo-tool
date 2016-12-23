@@ -11,6 +11,7 @@
         "spatie/crawler": "^2.0",
         "spatie/laravel-blade-javascript": "^1.0",
         "spatie/laravel-fractal": "^3.0",
+        "spatie/laravel-tail": "^1.1",
         "symfony/dom-crawler": "^3.2"
     },
     "require-dev": {

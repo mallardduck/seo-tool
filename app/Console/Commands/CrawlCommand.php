@@ -13,7 +13,7 @@ class CrawlCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'crawl';
+    protected $signature = 'crawl {url}';
 
     /**
      * The console command description.
@@ -39,8 +39,8 @@ class CrawlCommand extends Command
      */
     public function handle()
     {
-        $crawler = Crawler::create()
+        Crawler::create()
             ->setCrawlObserver(new CrawlObserver())
-            ->startCrawling('https://spatie.be');
+            ->startCrawling($this->argument('url'));
     }
 }

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use League\Fractal\TransformerAbstract;
 
-class CrawledUrlReportTransformer extends TransformerAbstract
+class CrawedUrlReportTransformer extends TransformerAbstract
 {
     public function transform(CrawledUrlReport $crawledUrlReport): array
     {

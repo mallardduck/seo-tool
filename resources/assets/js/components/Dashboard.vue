@@ -1,9 +1,5 @@
 <template>
     <div>
-        ik ben dashboard
-
-        <header></header>
-
         <div v-show="hasActiveUrl">
             <span>Amount of urls crawled: {{ crawlCount }}</span>
         </div>

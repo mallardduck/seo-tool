@@ -1,6 +1,6 @@
 <template>
     <div>
-        ik ben header
+        header
         <div v-show="crawlerIsNotBusy">
             <input v-model="url" placeholder="https://example.com">
             <button @click="startCrawling">Start crawling</button>
@@ -8,7 +8,14 @@
 
         <div>CrawlStatus: {{ crawlStatus }}</div>
 
+        <ul>
+            <li><router-link to="/">Dashboard</router-link></li>
+            <li><router-link to="/all">All crawled links</router-link></li>
+        </ul>
+
         <h1 v-show="hasActiveUrl">Seo report for {{ activeUrl }}</h1>
+
+
 
     </div>
 </template>
@@ -27,7 +34,7 @@ export default {
         },
 
         hasActiveUrl() {
-           return this.activeUrl == '';
+           return this.activeUrl != '';
         },
 
         activeUrl() {

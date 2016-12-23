@@ -1,7 +1,5 @@
 <template>
     <div>
-        <header></header>
-
         <div v-show="hasActiveUrl">
             <span>Amount of urls crawled: {{ crawlCount }}</span>
 

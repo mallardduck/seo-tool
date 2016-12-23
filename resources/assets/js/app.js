@@ -19,16 +19,16 @@ import VueRouter from 'vue-router'
 
 import CrawledList from './components/CrawledList.vue';
 import Dashboard from './components/Dashboard.vue';
-import Header from './components/Dashboard.vue';
+import MyHeader from './components/MyHeader.vue';
 
 Vue.component('CrawledList', CrawledList);
 Vue.component('Dashboard', Dashboard);
-Vue.component('Header', Header);
+Vue.component('MyHeader', MyHeader);
 
 Vue.use(VueRouter)
 const routes = [
     { path: '/', component: Dashboard },
-    { path: '/crawled/all', component: CrawledList }
+    { path: '/all', component: CrawledList }
 ]
 
 const router = new VueRouter({
@@ -42,7 +42,6 @@ const app = new Vue({
     el: '#app',
 
     created() {
-
         window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (event) => {
             this.$store.commit('addCrawledUrl', new CrawledUrl(event.data));
         });
@@ -50,6 +49,5 @@ const app = new Vue({
         window.Echo.channel('crawler').listen('CrawlHasEnded', (event) => {
             this.$store.commit('crawlHasEnded');
         });
-
     },
 });

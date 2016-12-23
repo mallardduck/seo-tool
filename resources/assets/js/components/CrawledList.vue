@@ -17,7 +17,7 @@
                     <td>{{ crawledUrl.url }}</td>
                     <td>{{ crawledUrl.title }}</td>
                     <td>{{ crawledUrl.h1 }}</td>
-                    <td>TO DO</td>
+                    <td>{{ crawledUrl.contentType }}</td>
                 <tr>
 
             </table>

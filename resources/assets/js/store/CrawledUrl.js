@@ -7,4 +7,6 @@ export default class CrawledUrl
         this.h1 = crawledUrlProperties.h1;
         this.headers = crawledUrlProperties.headers
     }
+
+
 }

@@ -5,7 +5,7 @@
     @javascript(compact('pusherKey'))
 
     <div id="app">
-        <my-header></my-header>
+        <app-header></app-header>
         <router-view></router-view>
     </div>
 @endsection

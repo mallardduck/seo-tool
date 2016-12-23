@@ -3,4 +3,4 @@ preset: laravel
 linting: true
 
 disabled:
-- simplified_null_return: false
+- simplified_null_return

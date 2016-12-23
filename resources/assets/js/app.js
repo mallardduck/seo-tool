@@ -19,11 +19,11 @@ import VueRouter from 'vue-router'
 
 import CrawledList from './components/CrawledList.vue';
 import Dashboard from './components/Dashboard.vue';
-import MyHeader from './components/MyHeader.vue';
+import AppHeader from './components/AppHeader.vue';
 
 Vue.component('CrawledList', CrawledList);
 Vue.component('Dashboard', Dashboard);
-Vue.component('MyHeader', MyHeader);
+Vue.component('AppHeader', AppHeader);
 
 Vue.use(VueRouter)
 const routes = [

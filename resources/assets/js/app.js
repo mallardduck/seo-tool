@@ -1,30 +1,21 @@
+import Echo from 'laravel-echo';
+import store from './store';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-import store from './store/index';
-import CrawledUrl from './store/CrawledUrl';
+window.Echo = new Echo({
+     broadcaster: 'pusher',
+     key: window.pusherKey,
+});
 
 Vue.component('CrawlControls', require('./components/CrawlControls.vue'));
 Vue.component('CrawlResults', require('./components/CrawlResults.vue'));
 
 const app = new Vue({
+
     store,
+
     el: '#app',
 
     created() {
-
         window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (event) => {
             this.$store.commit('addCrawledUrl', new CrawledUrl(event.data));
         });
@@ -32,6 +23,5 @@ const app = new Vue({
         window.Echo.channel('crawler').listen('CrawlHasEnded', (event) => {
             this.$store.commit('crawlHasEnded');
         });
-
     },
 });

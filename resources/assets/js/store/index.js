@@ -7,14 +7,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         crawledUrls: [],
-        crawlingUrl: '',
+        activeUrl: '',
         crawlStatus: 'idle',
     },
 
     mutations: {
         startCrawling(state, url) {
             state.crawledUrls = [];
-            state.crawlingUrl = url;
+            state.activeUrl = url;
             state.crawlStatus = 'busy';
         },
 

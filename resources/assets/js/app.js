@@ -15,11 +15,28 @@ require('./bootstrap');
 
 import store from './store/index';
 import CrawledUrl from './store/CrawledUrl';
+import VueRouter from 'vue-router'
 
-Vue.component('CrawlControls', require('./components/CrawlControls.vue'));
-Vue.component('CrawlResults', require('./components/CrawlResults.vue'));
+import Dashboard from './Components/Dashboard.vue';
+import CrawledList from './Components/CrawledList.vue';
+
+Vue.component('Header', require('./components/Header.vue'));
+Vue.component('CrawledList', require('./components/CrawledList.vue'));
+Vue.component('Dashboard', require('./components/Dashboard.vue'));
+
+Vue.use(VueRouter)
+const routes = [
+    { path: '/', component: Dashboard },
+    { path: '/crawled/all', component: CrawledList }
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+})
 
 const app = new Vue({
+    router,
     store,
     el: '#app',
 

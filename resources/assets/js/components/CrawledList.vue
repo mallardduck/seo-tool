@@ -1,11 +1,8 @@
 <template>
     <div>
+        <header></header>
 
-        <crawlControls></crawlControls>
-
-        <div v-show="hasResults">
-            <h1>Results for {{ crawlingUrl }}</h1>
-
+        <div v-show="hasActiveUrl">
             <span>Amount of urls crawled: {{ crawlCount }}</span>
 
             <table>
@@ -32,12 +29,12 @@
 <script>
     export default {
         computed: {
-            crawlingUrl() {
-                return this.$store.state.crawlingUrl
+            activeUrl() {
+                return this.$store.state.activeUrl
             },
 
-            hasResults() {
-                return this.crawlingUrl != '';
+            hasActiveUrl() {
+                return this.activeUrl != '';
             },
 
             crawlCount () {
@@ -53,18 +50,6 @@
             increment() {
               this.$store.commit('increment');
             },
-
         }
-
     }
-
-
-
-
-
-
-
-
-
-
 </script>

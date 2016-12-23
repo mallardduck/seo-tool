@@ -10,8 +10,6 @@ interface State {
     crawlStatus: CrawlStatus;
 }
 
-type ActionContext = Vuex.ActionContext<State, State>;
-
 const state: State = {
     crawledUrls: [],
     crawlingUrl: '',
@@ -34,8 +32,10 @@ const mutations = {
     },
 };
 
+type Context = Vuex.ActionContext<State, State>;
+
 const actions = {
-    startCrawling({ commit }: ActionContext, { url }: { url: string }) {
+    startCrawling({ commit }: Context, { url }: { url: string }) {
         axios
             .post('/api/crawl/start', {url})
             .then(() => commit('startCrawling', { url }));

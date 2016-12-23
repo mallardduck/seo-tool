@@ -1,6 +1,6 @@
 <template>
     <div>
-        ik ben dashoard
+        ik ben dashboard
 
         <header></header>
 

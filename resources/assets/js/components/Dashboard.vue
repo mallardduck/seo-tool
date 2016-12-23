@@ -1,7 +1,5 @@
 <template>
     <div>
-        Dashoard!
-
         <header></header>
 
         <div v-show="hasActiveUrl">

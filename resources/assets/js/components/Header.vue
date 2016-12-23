@@ -1,5 +1,6 @@
 <template>
     <div>
+        ik ben header
         <div v-show="crawlerIsNotBusy">
             <input v-model="url" placeholder="https://example.com">
             <button @click="startCrawling">Start crawling</button>
@@ -16,6 +17,8 @@
 export default {
     computed: {
         crawlerIsNotBusy()  {
+        return true;
+
            return this.$store.state.crawlStatus != 'busy';
         },
 

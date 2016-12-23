@@ -17,8 +17,8 @@ import store from './store/index';
 import CrawledUrl from './store/CrawledUrl';
 import VueRouter from 'vue-router'
 
-import Dashboard from './Components/Dashboard.vue';
-import CrawledList from './Components/CrawledList.vue';
+import Dashboard from './components/Dashboard.vue';
+import CrawledList from './components/CrawledList.vue';
 
 Vue.component('Header', require('./components/Header.vue'));
 Vue.component('CrawledList', require('./components/CrawledList.vue'));

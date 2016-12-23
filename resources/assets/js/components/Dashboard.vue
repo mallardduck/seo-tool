@@ -1,5 +1,7 @@
 <template>
     <div>
+        ik ben dashoard
+
         <header></header>
 
         <div v-show="hasActiveUrl">

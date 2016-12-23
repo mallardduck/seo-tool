@@ -49,7 +49,7 @@ class CrawledUrlReport
     public function getStatusCode(): ?int
     {
         if (! $this->response) {
-            return;
+            return null;
         }
 
         return $this->response->getStatusCode();

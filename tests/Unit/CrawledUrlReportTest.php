@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use App\Services\CrawledUrlReport;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Spatie\Crawler\Url;
 

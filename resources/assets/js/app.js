@@ -17,12 +17,13 @@ import store from './store/index';
 import CrawledUrl from './store/CrawledUrl';
 import VueRouter from 'vue-router'
 
-import Dashboard from './components/Dashboard.vue';
 import CrawledList from './components/CrawledList.vue';
+import Dashboard from './components/Dashboard.vue';
+import Header from './components/Dashboard.vue';
 
-Vue.component('Header', require('./components/Header.vue'));
-Vue.component('CrawledList', require('./components/CrawledList.vue'));
-Vue.component('Dashboard', require('./components/Dashboard.vue'));
+Vue.component('CrawledList', CrawledList);
+Vue.component('Dashboard', Dashboard);
+Vue.component('Header', Header);
 
 Vue.use(VueRouter)
 const routes = [

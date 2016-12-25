@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'CrawlController@index');
+Route::get('/{page?}', 'CrawlController@index');

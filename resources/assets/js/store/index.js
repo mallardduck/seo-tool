@@ -36,8 +36,7 @@ export default new Vuex.Store({
     actions: {
         startCrawling(context, url) {
             axios.post('/api/crawl/start', {url})
-                .then(function() {console.log('hier'); context.commit('startCrawling', url)
-            })
+                .then(() => context.commit('startCrawling', url))
         }
     }
 })

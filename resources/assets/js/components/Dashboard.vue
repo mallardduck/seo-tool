@@ -3,7 +3,7 @@
         <h2>Dashboard</h2>
 
         <div v-show="hasActiveUrl">
-            <span>Amount of urls crawled: {{ crawlCount }}</span>
+            <span>Amount of urls crawled: {{ crawlCount }}</span><br />
             <span>Amount of errors: {{ errorCount }}</span>
         </div>
     </div>

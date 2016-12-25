@@ -1,6 +1,5 @@
 <template>
     <div>
-        header
         <div v-show="crawlerIsNotBusy">
             <input v-model="url" placeholder="https://example.com">
             <button @click="startCrawling">Start crawling</button>
@@ -10,13 +9,11 @@
 
         <ul>
             <li><router-link to="/">Dashboard</router-link></li>
+            <li><router-link to="/errors">Non 2xx responses</router-link></li>
             <li><router-link to="/all">All crawled links</router-link></li>
         </ul>
 
         <h1 v-show="hasActiveUrl">Seo report for {{ activeUrl }}</h1>
-
-
-
     </div>
 </template>
 

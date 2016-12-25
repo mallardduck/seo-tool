@@ -1,8 +1,10 @@
 <template>
     <div>
-        <div v-show="hasActiveUrl">
-            <span>Amount of urls crawled: {{ crawlCount }}</span>
+        <h2>All crawled urls</h2>
 
+        <span>Amount of urls crawled: {{ crawlCount }}</span>
+
+        <div v-show="hasActiveUrl">
             <table>
                 <tr>
                     <td>Status code</td>
@@ -42,14 +44,8 @@
             },
 
             crawledUrls () {
-                return this.$store.state.crawledUrls
+                return this.$store.state.crawledUrls;
             },
         },
-
-        methods: {
-            increment() {
-              this.$store.commit('increment');
-            },
-        }
     }
 </script>

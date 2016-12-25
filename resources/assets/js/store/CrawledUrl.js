@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default class CrawledUrl
 {
     constructor(crawledUrlProperties) {
@@ -14,6 +16,18 @@ export default class CrawledUrl
         }
 
         return this.headers['Content-Type'][0] || '';
+    }
+
+    isError() {
+         if(_.startsWith(this.statusCode, '2')) {
+             return false;
+         }
+
+        if(_.startsWith(this.statusCode, '3')) {
+            return false;
+        }
+
+        return true;
     }
 
 

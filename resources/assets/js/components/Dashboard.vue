@@ -1,7 +1,10 @@
 <template>
     <div>
+        <h2>Dashboard</h2>
+
         <div v-show="hasActiveUrl">
             <span>Amount of urls crawled: {{ crawlCount }}</span>
+            <span>Amount of errors: {{ errorCount }}</span>
         </div>
     </div>
 </template>
@@ -11,6 +14,10 @@
         computed: {
             crawlCount () {
                 return this.$store.state.crawledUrls.length;
+            },
+
+            errorCount () {
+                return this.$store.getters.errors.length;
             },
 
             activeUrl() {

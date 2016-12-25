@@ -11,6 +11,12 @@ export default new Vuex.Store({
         crawlStatus: 'idle',
     },
 
+    getters: {
+        errors: state => {
+            return state.crawledUrls.filter(crawledUrl => crawledUrl.isError())
+        },
+    },
+
     mutations: {
         startCrawling(state, url) {
             state.crawledUrls = [];

@@ -2,10 +2,14 @@
     <div>
         <div v-show="crawlerIsNotBusy">
             <input v-model="url" placeholder="https://example.com">
+            <select v-model="crawlType">
+              <option v-for="item in crawlOptions" :value="item.value" v-text="item.text"></option>
+            </select>
             <button @click="startCrawling">Start crawling</button>
         </div>
 
         <div>CrawlStatus: {{ crawlStatus }}</div>
+        <div>CrawlType: {{ crawlType }}</div>
 
         <ul>
             <li><router-link to="/">Dashboard</router-link></li>
@@ -40,9 +44,22 @@ export default {
         },
     },
 
+    data: function () {
+      return {
+        crawlType: 'default',
+        crawlOptions: [{
+          value: 'default',
+          text: 'Default'
+        },{
+          value: 'redirect',
+          text: 'Redirects'
+        }]
+      }
+    },
+
     methods: {
         startCrawling() {
-            this.$store.dispatch('startCrawling', this.url)
+            this.$store.dispatch('startCrawling', {'url': this.url, 'crawlType': this.crawlType})
         },
     }
 }

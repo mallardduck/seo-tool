@@ -9,19 +9,24 @@ export default new Vuex.Store({
         crawledUrls: [],
         activeUrl: '',
         crawlStatus: 'idle',
+        crawlType: 'default',
     },
 
     getters: {
         errors: state => {
             return state.crawledUrls.filter(crawledUrl => crawledUrl.isError())
         },
+        redirects: state => {
+            return state.crawledUrls.filter(crawledUrl => crawledUrl.isRedirect())
+        },
     },
 
     mutations: {
-        startCrawling(state, url) {
+        startCrawling(state, url, type) {
             state.crawledUrls = [];
             state.activeUrl = url;
             state.crawlStatus = 'busy';
+            state.crawlType = type;
         },
 
         addCrawledUrl (state, crawledUrl) {
@@ -34,9 +39,15 @@ export default new Vuex.Store({
     },
 
     actions: {
-        startCrawling(context, url) {
-            axios.post('/api/crawl/start', {url})
-                .then(() => context.commit('startCrawling', url))
+        startCrawling(context, opts) {
+            var url = opts.url;
+            if (opts.crawlType === 'redirect'){
+              axios.post('/api/crawl/startRedirect', {url})
+                  .then(() => context.commit('startCrawling', url));
+            } else {
+              axios.post('/api/crawl/start', {url})
+              .then(() => context.commit('startCrawling', url));
+            }
         }
     }
 })

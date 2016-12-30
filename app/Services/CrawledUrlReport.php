@@ -22,6 +22,12 @@ class CrawledUrlReport
     /** @var null|\Spatie\Crawler\Url */
     protected $foundOnUrl;
 
+    /** @var string */
+    protected $originalHtml = '';
+
+    /** @var string */
+    protected $updatedHtml;
+
     public function __construct(CrawlUrl $url, $response)
     {
         $this->url = $url;
@@ -31,6 +37,18 @@ class CrawledUrlReport
         $this->responseBody = $response ? (string) $response->getBody() : '';
 
         $this->foundOnUrl = $url->foundOnUrl;
+        
+        if (! is_null($url->node)) {
+          $this->originalHtml = $url->node->getHtml();
+          
+          
+          if ($response->hasHeader('X-Guzzle-Redirect-History')) {
+            $redirectHeaders = $response->getHeader('X-Guzzle-Redirect-History');
+            $finalUrl = end($redirectHeaders);
+            
+            $this->updatedHtml = $url->node->getHtmlAndUpdateHref($finalUrl);
+          }
+        }
     }
 
     public function getUrl(): string
@@ -54,6 +72,24 @@ class CrawledUrlReport
         }
 
         return $this->response->getStatusCode();
+    }
+
+    public function getHtml()
+    {
+        if (! $this->originalHtml) {
+            return null;
+        }
+
+        return $this->originalHtml;
+    }
+
+    public function getNewHtml()
+    {
+        if (! $this->updatedHtml) {
+            return null;
+        }
+
+        return $this->updatedHtml;
     }
 
     public function getTitle(): string

@@ -11,10 +11,12 @@ class CrawledUrlReportTransformer extends TransformerAbstract
         return [
             'url' => $crawledUrlReport->getUrl(),
             'statusCode' => $crawledUrlReport->getStatusCode(),
-            'title' => $crawledUrlReport->getTitle(),
             'headers' => $crawledUrlReport->getHeaders(),
+            'title' => $crawledUrlReport->getTitle(),
             'h1' => $crawledUrlReport->getH1(),
             'foundOnUrl' => $crawledUrlReport->getFoundOnUrl(),
+            'originalHtml' => $crawledUrlReport->getHtml(),
+            'updatedHtml' => $crawledUrlReport->getNewHtml(),
         ];
     }
 }

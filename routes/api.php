@@ -13,3 +13,4 @@
 */
 
 Route::post('/crawl/start', 'CrawlController@start');
+Route::post('/crawl/startRedirect', 'CrawlController@startRedirect');

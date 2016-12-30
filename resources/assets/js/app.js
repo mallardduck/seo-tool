@@ -20,18 +20,21 @@ import VueRouter from 'vue-router'
 import Errors from './components/Errors.vue';
 import CrawledList from './components/CrawledList.vue';
 import Dashboard from './components/Dashboard.vue';
+import LinksDashboard from './components/LinksDashboard.vue';
 import AppHeader from './components/AppHeader.vue';
 
 Vue.component('CrawledList', CrawledList);
 Vue.component('Errors', Errors);
 Vue.component('Dashboard', Dashboard);
+Vue.component('LinksDashboard', LinksDashboard);
 Vue.component('AppHeader', AppHeader);
 
 Vue.use(VueRouter)
 const routes = [
     { path: '/', component: Dashboard },
     { path: '/errors', component: Errors },
-    { path: '/all', component: CrawledList }
+    { path: '/all', component: CrawledList },
+    { path: '/links', component: LinksDashboard }
 ]
 
 const router = new VueRouter({

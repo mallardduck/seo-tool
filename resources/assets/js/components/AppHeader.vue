@@ -11,6 +11,7 @@
             <li><router-link to="/">Dashboard</router-link></li>
             <li><router-link to="/errors">Non 2xx responses</router-link></li>
             <li><router-link to="/all">All crawled links</router-link></li>
+            <li><router-link to="/links">links Dashboard</router-link></li>
         </ul>
 
         <h1 v-show="hasActiveUrl">Seo report for {{ activeUrl }}</h1>

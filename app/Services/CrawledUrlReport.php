@@ -3,13 +3,14 @@
 namespace App\Services;
 
 use Spatie\Crawler\Url;
+use Spatie\Crawler\CrawlUrl;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DomCrawler\Crawler as DomCrawler;
 
 class CrawledUrlReport
 {
-    /** @var \Spatie\Crawler\Url */
+    /** @var \Spatie\Crawler\CrawlUrl */
     protected $url;
 
     /** @var null|\Psr\Http\Message\ResponseInterface */
@@ -21,7 +22,7 @@ class CrawledUrlReport
     /** @var null|\Spatie\Crawler\Url */
     protected $foundOnUrl;
 
-    public function __construct(Url $url, ?ResponseInterface $response, ?Url $foundOnUrl = null)
+    public function __construct(CrawlUrl $url, $response)
     {
         $this->url = $url;
 
@@ -29,12 +30,12 @@ class CrawledUrlReport
 
         $this->responseBody = $response ? (string) $response->getBody() : '';
 
-        $this->foundOnUrl = $foundOnUrl;
+        $this->foundOnUrl = $url->foundOnUrl;
     }
 
     public function getUrl(): string
     {
-        return (string) $this->url;
+        return (string) $this->url->url;
     }
 
     public function getFoundOnUrl(): string
@@ -46,7 +47,7 @@ class CrawledUrlReport
         return (string) $this->foundOnUrl;
     }
 
-    public function getStatusCode(): ?int
+    public function getStatusCode()
     {
         if (! $this->response) {
             return null;

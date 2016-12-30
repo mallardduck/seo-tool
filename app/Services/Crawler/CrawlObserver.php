@@ -2,7 +2,7 @@
 
 namespace App\Services\Crawler;
 
-use Spatie\Crawler\Url;
+use Spatie\Crawler\CrawlUrl;
 use App\Events\CrawlHasEnded;
 use App\Events\UrlHasBeenCrawled;
 use App\Services\CrawledUrlReport;
@@ -12,26 +12,25 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
     /**
      * Called when the crawler will crawl the url.
      *
-     * @param \Spatie\Crawler\Url $url
+     * @param \Spatie\Crawler\CrawlUrl $url
      *
      * @return void
      */
-    public function willCrawl(Url $url)
+    public function willCrawl(CrawlUrl $url)
     {
     }
 
     /**
      * Called when the crawler has crawled the given url.
      *
-     * @param \Spatie\Crawler\Url $url
+     * @param \Spatie\Crawler\CrawlUrl $url
      * @param \Psr\Http\Message\ResponseInterface|null $response
-     * @param \Spatie\Crawler\Url $foundOnUrl
      *
      * @return void
      */
-    public function hasBeenCrawled(Url $url, $response, Url $foundOnUrl = null)
+    public function hasBeenCrawled(CrawlUrl $url, $response)
     {
-        $crawledUrlReport = new CrawledUrlReport($url, $response, $foundOnUrl);
+        $crawledUrlReport = new CrawledUrlReport($url, $response);
 
         event(new UrlHasBeenCrawled($crawledUrlReport));
     }

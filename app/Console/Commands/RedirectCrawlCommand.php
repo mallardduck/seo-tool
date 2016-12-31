@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Spatie\Crawler\Crawler;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Console\Command;
+use App\Services\Crawler\CrawlProfile;
 use App\Services\Crawler\CrawlObserver;
 
 class RedirectCrawlCommand extends Command
@@ -51,6 +52,7 @@ class RedirectCrawlCommand extends Command
                     'track_redirects' => true
                 ]
             ])
+            ->setCrawlProfile(new CrawlProfile())
             ->setCrawlObserver(new CrawlObserver())
             ->startCrawling($this->argument('url'));
     }

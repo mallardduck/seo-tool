@@ -4,33 +4,38 @@
 
         <div v-show="hasActiveUrl">
             <span>Amount of urls crawled: {{ crawlCount }}</span><br />
+            <span>Amount of successes: {{ successCount }}</span><br />
+            <span>Amount of redirects: {{ redirectCount }}</span><br />
             <span>Amount of errors: {{ errorCount }}</span><br />
-            <span>Amount of redirects: {{ redirectCount }}</span>
         </div>
         <hr />
         <h2>Link Redirects</h2>
         <span>Amount of redirects: {{ redirectCount }}</span>
 
-        <div v-show="hasActiveUrl">
+        <div class="table-responsive" v-show="hasActiveUrl">
 
 
-            <table>
-                <tr>
-                    <td>Status code</td>
-                    <td>Found On</td>
-                    <td>Url</td>
-                    <td>Original HTML</td>
-                    <td>Updated HTML</td>
-                <tr/>
-
-                <tr v-for="crawledUrl in redirects">
-                    <td>{{ crawledUrl.statusCode }}</td>
-                    <td>{{ crawledUrl.foundOnUrl }}</td>
-                    <td>{{ crawledUrl.url }}</td>
-                    <td>{{ crawledUrl.originalHtml }}</td>
-                    <td>{{ crawledUrl.updatedHtml }}</td>
-                <tr>
-
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Redirect Count</th>
+                        <th>Status code</th>
+                        <th>Found On</th>
+                        <th>Url</th>
+                        <th>Original HTML</th>
+                        <th>Updated HTML</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="crawledUrl in redirects">
+                        <td><redirects-link v-bind:history="crawledUrl.redirects" >{{ crawledUrl.redirects.length }}</redirects-link></td>
+                        <td>{{ crawledUrl.statusCode }}</td>
+                        <td>{{ crawledUrl.foundOnUrl }}</td>
+                        <td>{{ crawledUrl.url }}</td>
+                        <td>{{ crawledUrl.originalHtml }}</td>
+                        <td>{{ crawledUrl.updatedHtml }}</td>
+                    <tr>
+                <tbody>
             </table>
         </div>
 
@@ -44,12 +49,16 @@
                 return this.$store.state.crawledUrls.length;
             },
 
-            errorCount () {
-                return this.$store.getters.errors.length;
+            successCount () {
+                return this.$store.getters.successes.length;
             },
 
             redirectCount () {
                 return this.$store.getters.redirects.length;
+            },
+
+            errorCount () {
+                return this.$store.getters.errors.length;
             },
 
             redirects () {

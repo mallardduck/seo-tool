@@ -5,13 +5,29 @@ export default class CrawledUrl
     constructor(crawledUrlProperties) {
         this.url = crawledUrlProperties.url;
         this.statusCode = crawledUrlProperties.statusCode;
-        this.headers = crawledUrlProperties.headers
+        this.redirects = crawledUrlProperties.redirectHistory;
+        this.headers = crawledUrlProperties.headers;
         this.title = (this.statusCode == 200 && crawledUrlProperties.headers['X-Guzzle-Redirect-History'] instanceof Object) ? crawledUrlProperties.title : '';
         this.h1 = (this.statusCode == 200 && crawledUrlProperties.headers['X-Guzzle-Redirect-History'] instanceof Object) ? crawledUrlProperties.h1 : '';
-        this.foundOnUrl = crawledUrlProperties.foundOnUrl
-        this.originalHtml = crawledUrlProperties.originalHtml
-        this.updatedHtml = crawledUrlProperties.updatedHtml
-        console.log(crawledUrlProperties)
+        this.foundOnUrl = crawledUrlProperties.foundOnUrl;
+        this.originalHtml = crawledUrlProperties.originalHtml;
+        this.updatedHtml = crawledUrlProperties.updatedHtml;
+
+        this.hasDomElements = domResInt(this);
+
+        function domResInt(thing) {
+            if(thing.originalHtml !== null && thing.updatedHtml !== null) {
+                return 3;
+            }
+            if(thing.originalHtml === null && thing.updatedHtml !== null) {
+                return 2;
+            }
+            if(thing.originalHtml !== null && thing.updatedHtml === null) {
+                return 1;
+            }
+            return 0;
+        }
+
     }
 
     get contentType() {
@@ -31,25 +47,19 @@ export default class CrawledUrl
     }
 
     isRedirect() {
-        if(_.startsWith(this.statusCode, '3') || (_.startsWith(this.statusCode, '2') && this.headers['X-Guzzle-Redirect-History'] instanceof Object)) {
+        if(this.redirects instanceof Array) {
             return true;
         }
 
        return false;
     }
 
-    hasDomElements() {
-        if(this.originalHtml !== null && this.updatedHtml !== null) {
-            return 3;
-        }
-        if(this.originalHtml === null && this.updatedHtml !== null) {
-            return 2;
-        }
-        if(this.originalHtml !== null && this.updatedHtml === null) {
-            return 1;
+    isSuccess() {
+        if(_.startsWith(this.statusCode, '2') && this.redirects === null) {
+            return true;
         }
 
-        return 0;
+       return false;
     }
 
 }

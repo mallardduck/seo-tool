@@ -19,6 +19,9 @@ class CrawledUrlReport
     /** @var string */
     protected $responseBody = '';
 
+    /** @var \Illuminate\Support\Collection */
+    protected $redirectHistory;
+
     /** @var null|\Spatie\Crawler\Url */
     protected $foundOnUrl;
 
@@ -28,6 +31,13 @@ class CrawledUrlReport
     /** @var string */
     protected $updatedHtml;
 
+
+    /**
+     * @param \Spatie\Crawler\CrawlUrl  $url
+     * @param \Psr\Http\Message\ResponseInterface|null             $response
+     *
+     * @return void
+     */
     public function __construct(CrawlUrl $url, $response)
     {
         $this->url = $url;
@@ -37,17 +47,26 @@ class CrawledUrlReport
         $this->responseBody = $response ? (string) $response->getBody() : '';
 
         $this->foundOnUrl = $url->foundOnUrl;
-        
+
         if (! is_null($url->node)) {
           $this->originalHtml = $url->node->getHtml();
-          
-          
-          if ($response->hasHeader('X-Guzzle-Redirect-History')) {
-            $redirectHeaders = $response->getHeader('X-Guzzle-Redirect-History');
-            $finalUrl = end($redirectHeaders);
-            
+        }
+
+        if ($response->hasHeader('X-Guzzle-Redirect-History')) {
+            $firstUrl = (string) $this->url->url;
+            $redirectHistory = collect($response->getHeader('X-Guzzle-Redirect-History'))->reverse()->push((string) $this->url->url)->reverse()->values();
+            $redirectStatusHistory = collect($response->getHeader('X-Guzzle-Redirect-Status-History'))
+                                ->map(function ($item, $key) {
+                                    return (int) $item;
+                                })
+                                ->push((int) $response->getStatusCode());
+            $finalUrl = $redirectHistory->last();
+
+            $this->redirectHistory = $redirectHistory->map(function ($item, $key) use ($redirectStatusHistory) {
+                return ['location' => $item, 'code' => $redirectStatusHistory[$key]];
+            });
+
             $this->updatedHtml = $url->node->getHtmlAndUpdateHref($finalUrl);
-          }
         }
     }
 
@@ -72,6 +91,15 @@ class CrawledUrlReport
         }
 
         return $this->response->getStatusCode();
+    }
+
+    public function getRedirectHistory()
+    {
+        if (! $this->redirectHistory) {
+            return null;
+        }
+
+        return $this->redirectHistory;
     }
 
     public function getHtml()

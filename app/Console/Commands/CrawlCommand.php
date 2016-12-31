@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Spatie\Crawler\Crawler;
 use Illuminate\Console\Command;
+use App\Services\Crawler\CrawlProfile;
 use App\Services\Crawler\CrawlObserver;
 
 class CrawlCommand extends Command
@@ -40,6 +41,7 @@ class CrawlCommand extends Command
     public function handle()
     {
         Crawler::create()
+            ->setCrawlProfile(new CrawlProfile())
             ->setCrawlObserver(new CrawlObserver())
             ->startCrawling($this->argument('url'));
     }

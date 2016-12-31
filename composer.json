@@ -7,12 +7,17 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/mallardduck/guzzle"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/mallardduck/crawler"
         }
     ],
     "require": {
         "php": "^7.0",
         "laravel/framework": "5.3.*",
+        "guzzlehttp/guzzle": "dev-track_redirect_codes",
         "pusher/pusher-php-server": "^2.6",
         "spatie/crawler": "dev-mallard-master",
         "spatie/laravel-blade-javascript": "^1.0",

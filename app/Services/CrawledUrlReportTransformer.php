@@ -11,6 +11,7 @@ class CrawledUrlReportTransformer extends TransformerAbstract
         return [
             'url' => $crawledUrlReport->getUrl(),
             'statusCode' => $crawledUrlReport->getStatusCode(),
+            'redirectHistory' => $crawledUrlReport->getRedirectHistory(),
             'headers' => $crawledUrlReport->getHeaders(),
             'title' => $crawledUrlReport->getTitle(),
             'h1' => $crawledUrlReport->getH1(),

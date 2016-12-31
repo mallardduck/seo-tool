@@ -22,12 +22,14 @@ import CrawledList from './components/CrawledList.vue';
 import Dashboard from './components/Dashboard.vue';
 import LinksDashboard from './components/LinksDashboard.vue';
 import AppHeader from './components/AppHeader.vue';
+import RedirectsLink from './components/RedirectsLink.vue';
 
 Vue.component('CrawledList', CrawledList);
 Vue.component('Errors', Errors);
 Vue.component('Dashboard', Dashboard);
 Vue.component('LinksDashboard', LinksDashboard);
 Vue.component('AppHeader', AppHeader);
+Vue.component('RedirectsLink', RedirectsLink);
 
 Vue.use(VueRouter)
 const routes = [

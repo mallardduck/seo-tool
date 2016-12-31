@@ -13,6 +13,9 @@ export default new Vuex.Store({
     },
 
     getters: {
+        successes: state => {
+            return state.crawledUrls.filter(crawledUrl => crawledUrl.isSuccess())
+        },
         errors: state => {
             return state.crawledUrls.filter(crawledUrl => crawledUrl.isError())
         },

@@ -12,6 +12,7 @@ class CrawlProfile implements \Spatie\Crawler\CrawlProfile
         return false;
       }
       if (starts_with($url->host, [
+          'grandmascookieblog.com',
           'www.liquidweb.com',
           'liquidweb.com',
         ])) {

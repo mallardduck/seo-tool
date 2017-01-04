@@ -31,6 +31,8 @@ class CrawledUrlReport
     /** @var string */
     protected $updatedHtml;
 
+    /** @var boolean */
+    protected $urlRedirects = false;
 
     /**
      * @param \Spatie\Crawler\CrawlUrl  $url
@@ -53,6 +55,7 @@ class CrawledUrlReport
         }
 
         if ($response->hasHeader('X-Guzzle-Redirect-History')) {
+            $this->urlRedirects = true;
             $firstUrl = (string) $this->url->url;
             $redirectHistory = collect($response->getHeader('X-Guzzle-Redirect-History'))->reverse()->push((string) $this->url->url)->reverse()->values();
             $redirectStatusHistory = collect($response->getHeader('X-Guzzle-Redirect-Status-History'))
@@ -68,6 +71,11 @@ class CrawledUrlReport
 
             $this->updatedHtml = $url->node->getHtmlAndUpdateHref($finalUrl);
         }
+    }
+
+    public function isRedirect(): bool
+    {
+        return $this->urlRedirects;
     }
 
     public function getUrl(): string

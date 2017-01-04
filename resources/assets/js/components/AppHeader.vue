@@ -23,6 +23,7 @@
           <li><router-link to="/links">links Dashboard</router-link></li>
         </ul>
         <div class="navbar-form navbar-right" v-show="crawlerIsNotBusy">
+        <span>CrawlStatus: <span class="label" v-bind:class="{ 'label-default': !crawlClass, 'label-primary': crawlClass, 'label-success': crawlClass === 2 }">{{ crawlStatus }}</span></span>
           <div class="form-group">
             <input type="text" class="form-control" v-model="url" placeholder="https://example.com">
             <select v-model="crawlType">
@@ -35,7 +36,6 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div>CrawlStatus: <span class="label" v-bind:class="{ 'label-default': !crawlClass, 'label-primary': crawlClass, 'label-success': crawlClass === 2 }">{{ crawlStatus }}</span></div>
 
   <h1 v-show="hasActiveUrl">Seo report for {{ activeUrl }}</h1>
 

@@ -22,7 +22,7 @@
           <li><router-link to="/all">All crawled links</router-link></li>
           <li><router-link to="/links">links Dashboard</router-link></li>
         </ul>
-        <div class="navbar-form navbar-right" v-show="crawlerIsNotBusy">
+        <div class="navbar-form navbar-right">
         <span>CrawlStatus: <span class="label" v-bind:class="{ 'label-default': !crawlClass, 'label-primary': crawlClass, 'label-success': crawlClass === 2 }">{{ crawlStatus }}</span></span>
           <div class="form-group">
             <input type="text" class="form-control" v-model="url" placeholder="https://example.com">
@@ -30,7 +30,7 @@
               <option v-for="item in crawlOptions" :value="item.value" v-text="item.text"></option>
             </select>
           </div>
-          <button class="btn btn-default" @click="startCrawling">Start crawling</button>
+          <button class="btn btn-default" v-show="crawlerIsNotBusy" @click="startCrawling">Start crawling</button>
         </div>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -45,12 +45,12 @@
 <script>
 export default {
     computed: {
+        crawlStatus() {
+        return this.$store.state.crawlStatus
+        },
+        
         crawlerIsNotBusy()  {
            return this.$store.state.crawlStatus != 'busy';
-        },
-
-        crawlStatus() {
-           return this.$store.state.crawlStatus
         },
 
         crawlClass() {

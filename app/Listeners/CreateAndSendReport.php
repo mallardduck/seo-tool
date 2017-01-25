@@ -35,6 +35,5 @@ class CreateAndSendReport implements ShouldQueue
         ->map(function ($item, $key) {
             return fractal($item, new CrawledUrlReportTransformer())->toArray();
         });
-        dd($event);
     }
 }

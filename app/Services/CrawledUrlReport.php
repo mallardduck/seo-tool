@@ -44,11 +44,9 @@ class CrawledUrlReport
     {
         $this->url = $url;
 
-        $this->response = $response;
-
-        $this->responseBody = $response ? (string) $response->getBody() : '';
-
         $this->foundOnUrl = $url->foundOnUrl;
+
+        $this->response = $response;
 
         if (! is_null($url->node)) {
           $this->originalHtml = $url->node->getHtml();
@@ -56,6 +54,8 @@ class CrawledUrlReport
 
         if ($response->hasHeader('X-Guzzle-Redirect-History')) {
             $this->urlRedirects = true;
+            $this->responseBody = $response ? (string) $response->getBody() : '';
+            
             $firstUrl = (string) $this->url->url;
             $redirectHistory = collect($response->getHeader('X-Guzzle-Redirect-History'))->reverse()->push((string) $this->url->url)->reverse()->values();
             $redirectStatusHistory = collect($response->getHeader('X-Guzzle-Redirect-Status-History'))

@@ -11,9 +11,8 @@ class CrawlProfile implements \Spatie\Crawler\CrawlProfile
       if (ends_with($url->path, ['.pdf']) || str_contains($url, ['/blog', '/kb', '/anchor', '/storm/api', '/manage'])) {
         return false;
       }
-      if (starts_with($url->host, [
+      if (str_contains($url->host, [
           'grandmascookieblog.com',
-          'www.liquidweb.com',
           'liquidweb.com',
         ])) {
         return true;

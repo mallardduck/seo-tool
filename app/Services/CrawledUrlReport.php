@@ -26,6 +26,9 @@ class CrawledUrlReport
     protected $foundOnUrl;
 
     /** @var string */
+    protected $nodeType;
+
+    /** @var string */
     protected $originalHtml = '';
 
     /** @var string */
@@ -50,9 +53,10 @@ class CrawledUrlReport
 
         if (! is_null($url->node)) {
           $this->originalHtml = $url->node->getHtml();
+          $this->nodeType = $url->node->getNodeType();
         }
 
-        if ($response->hasHeader('X-Guzzle-Redirect-History')) {
+        if ( !is_null($response) && $response->hasHeader('X-Guzzle-Redirect-History')) {
             $this->urlRedirects = true;
             $this->responseBody = $response ? (string) $response->getBody() : '';
             
@@ -90,6 +94,15 @@ class CrawledUrlReport
         }
 
         return (string) $this->foundOnUrl;
+    }
+
+    public function getNodeType(): string
+    {
+        if (! $this->nodeType) {
+            return '';
+        }
+
+        return (string) $this->nodeType;
     }
 
     public function getStatusCode()

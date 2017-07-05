@@ -12,7 +12,7 @@
                     <td>Title</td>
                     <td>H1</td>
                     <td>Content type</td>
-                <tr/>
+                </tr>
 
                 <tr v-for="crawledUrl in crawledUrls">
                     <td>{{ crawledUrl.statusCode }}</td>
@@ -20,7 +20,7 @@
                     <td>{{ crawledUrl.title }}</td>
                     <td>{{ crawledUrl.h1 }}</td>
                     <td>{{ crawledUrl.contentType }}</td>
-                <tr>
+                </tr>
 
             </table>
         </div>
@@ -45,6 +45,22 @@
 
             crawledUrls () {
                 return this.$store.state.crawledUrls;
+            },
+
+            crawledAnchorCount () {
+                return this.$store.state.crawledAnchors.length;
+            },
+
+            crawledAnchors () {
+                return this.$store.state.crawledAnchors;
+            },
+
+            crawledImagesCount () {
+                return this.$store.state.crawledImages.length;
+            },
+
+            crawledImages () {
+                return this.$store.state.crawledImages;
             },
         },
     }

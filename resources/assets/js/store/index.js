@@ -7,6 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         crawledUrls: [],
+        crawledAnchors: [],
+        crawledImages: [],
         activeUrl: '',
         crawlStatus: 'idle',
         crawlType: 'default',
@@ -27,6 +29,8 @@ export default new Vuex.Store({
     mutations: {
         startCrawling(state, url, type) {
             state.crawledUrls = [];
+            state.crawledAnchors = [];
+            state.crawledImages = [];
             state.activeUrl = url;
             state.crawlStatus = 'busy';
             state.crawlType = type;
@@ -34,6 +38,12 @@ export default new Vuex.Store({
 
         addCrawledUrl (state, crawledUrl) {
             state.crawledUrls.unshift(crawledUrl);
+            if (crawledUrl.isAnchor()) {
+              state.crawledAnchors.unshift(crawledUrl);
+            }
+            if (crawledUrl.isImage()) {
+              state.crawledImages.unshift(crawledUrl);
+            }
         },
 
         crawlHasEnded(state) {

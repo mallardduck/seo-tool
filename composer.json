@@ -16,8 +16,9 @@
     ],
     "require": {
         "php": "^7.0",
-        "guzzlehttp/guzzle": "dev-track_redirect_codes",
-        "laravel/framework": "5.3.*",
+        "laravel/framework": "5.4.*",
+        "laravel/tinker": "~1.0",
+        "guzzlehttp/guzzle": "^6.3",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^2.6",
         "spatie/crawler": "dev-mallard-master",

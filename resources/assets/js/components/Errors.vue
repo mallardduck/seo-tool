@@ -10,12 +10,14 @@
                 <tr>
                     <td>Status code</td>
                     <td>Url</td>
-                <tr/>
+                    <th>Found On</th>
+                </tr>
 
                 <tr v-for="crawledUrl in errors">
                     <td>{{ crawledUrl.statusCode }}</td>
                     <td>{{ crawledUrl.url }}</td>
-                <tr>
+                    <td>{{ crawledUrl.foundOnUrl }}</td>
+                </tr>
 
             </table>
         </div>

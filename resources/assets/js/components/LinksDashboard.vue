@@ -34,8 +34,8 @@
                         <td>{{ crawledUrl.url }}</td>
                         <td>{{ crawledUrl.originalHtml }}</td>
                         <td>{{ crawledUrl.updatedHtml }}</td>
-                    <tr>
-                <tbody>
+                    </tr>
+                </tbody>
             </table>
         </div>
 

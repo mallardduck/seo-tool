@@ -3,6 +3,7 @@ import _ from 'lodash';
 export default class CrawledUrl
 {
     constructor(crawledUrlProperties) {
+        this.nodeType = crawledUrlProperties.nodeType;
         this.url = crawledUrlProperties.url;
         this.statusCode = crawledUrlProperties.statusCode;
         this.redirects = crawledUrlProperties.redirectHistory;
@@ -36,6 +37,22 @@ export default class CrawledUrl
         }
 
         return this.headers['Content-Type'][0] || '';
+    }
+
+    isImage() {
+         if(this.nodeType == "img") {
+           return true;
+         }
+
+         return false;
+    }
+
+    isAnchor() {
+         if(this.nodeType == "a") {
+           return true;
+         }
+
+         return false;
     }
 
     isError() {

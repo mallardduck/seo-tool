@@ -75,6 +75,7 @@ export default {
     data: function () {
       return {
         crawlType: 'default',
+        url: '',
         crawlOptions: [{
           value: 'default',
           text: 'Default'

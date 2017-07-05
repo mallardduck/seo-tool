@@ -13,7 +13,11 @@ class CrawlProfile implements \Spatie\Crawler\CrawlProfile
       }
       if (str_contains($url->host, [
           'grandmascookieblog.com',
+          'new.staging.liquidweb.com',
+          'new.liquidweb.dev',
+          'new.liquidweb.com',
           'liquidweb.com',
+          'www-staging-liquidweb-com.s3.us-east-2.amazonaws.com',
         ])) {
         return true;
       }

@@ -9,6 +9,7 @@ class CrawledUrlReportTransformer extends TransformerAbstract
     public function transform(CrawledUrlReport $crawledUrlReport): array
     {
         return [
+            'nodeType' => $crawledUrlReport->getNodeType(),
             'url' => $crawledUrlReport->getUrl(),
             'statusCode' => $crawledUrlReport->getStatusCode(),
             'redirectHistory' => $crawledUrlReport->getRedirectHistory(),

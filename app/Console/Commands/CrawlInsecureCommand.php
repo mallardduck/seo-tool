@@ -46,7 +46,13 @@ class CrawlInsecureCommand extends Command
               RequestOptions::CONNECT_TIMEOUT => 10,
               RequestOptions::TIMEOUT => 10,
               RequestOptions::COOKIES => true,
-              RequestOptions::VERIFY => false
+              RequestOptions::VERIFY => false,
+              RequestOptions::ALLOW_REDIRECTS => [
+                  'max'             => 10,        // allow at most 10 redirects.
+                  'strict'          => true,      // use "strict" RFC compliant redirects.
+                  'referer'         => true,      // add a Referer header
+                  'track_redirects' => true
+              ]
           ])
             ->setCrawlProfile(new CrawlProfile())
             ->setCrawlObserver(new CrawlObserver())

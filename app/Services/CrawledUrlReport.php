@@ -72,8 +72,6 @@ class CrawledUrlReport
             $this->redirectHistory = $redirectHistory->map(function ($item, $key) use ($redirectStatusHistory) {
                 return ['location' => $item, 'code' => $redirectStatusHistory[$key]];
             });
-
-            $this->updatedHtml = $url->node->getHtmlAndUpdateHref($finalUrl);
         }
     }
 

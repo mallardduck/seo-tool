@@ -13,7 +13,7 @@
             tooltipText: function () {
                 var text = "\n";
                 for (var i = 0, len = this.history.length; i < len; i++) {
-                  text += "Redirect Code: "+this.history[i].code+" on page: "+this.history[i].location+"\n";
+                  text += "Redirect Status: "+this.history[i].code+" on page: "+this.history[i].location+"\n";
                 }
                 return text;
             }

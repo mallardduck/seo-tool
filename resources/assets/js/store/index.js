@@ -54,8 +54,8 @@ export default new Vuex.Store({
     actions: {
         startCrawling(context, opts) {
             var url = opts.url;
-            if (opts.crawlType === 'redirect'){
-              axios.post('/api/crawl/startRedirect', {url})
+            if (opts.crawlType === 'insecure'){
+              axios.post('/api/crawl/startInsecure', {url})
                   .then(() => context.commit('startCrawling', url));
             } else {
               axios.post('/api/crawl/start', {url})

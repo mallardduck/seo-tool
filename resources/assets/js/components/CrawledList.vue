@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>All crawled urls</h2>
+        <h3>All crawled urls</h3>
 
         <span>Amount of urls crawled: {{ crawlCount }}</span>
 

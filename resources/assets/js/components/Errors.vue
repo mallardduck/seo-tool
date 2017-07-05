@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Non 2xx responses</h2>
+        <h3>Non 2xx responses</h3>
         <span>Amount of errors: {{ errors.length }}</span>
 
         <div v-show="hasActiveUrl">

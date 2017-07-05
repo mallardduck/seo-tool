@@ -35,8 +35,8 @@ Vue.use(VueRouter)
 const routes = [
     { path: '/', component: Dashboard },
     { path: '/errors', component: Errors },
+    { path: '/redirects', component: LinksDashboard },
     { path: '/all', component: CrawledList },
-    { path: '/links', component: LinksDashboard }
 ]
 
 const router = new VueRouter({

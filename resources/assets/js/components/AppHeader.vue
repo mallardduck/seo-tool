@@ -18,9 +18,9 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><router-link to="/">Dashboard</router-link></li>
-          <li><router-link to="/errors">Non 2xx responses</router-link></li>
-          <li><router-link to="/all">All crawled links</router-link></li>
-          <li><router-link to="/links">links Dashboard</router-link></li>
+          <li v-show="!crawlerIsIdle"><router-link to="/errors">Non 2xx responses</router-link></li>
+          <li v-show="!crawlerIsIdle"><router-link to="/redirects">Redirect responses</router-link></li>
+          <li v-show="!crawlerIsIdle"><router-link to="/all">All crawled links</router-link></li>
         </ul>
         <div class="navbar-form navbar-right">
         <span>CrawlStatus: <span class="label" v-bind:class="{ 'label-default': !crawlClass, 'label-primary': crawlClass, 'label-success': crawlClass === 2 }">{{ crawlStatus }}</span></span>
@@ -30,7 +30,7 @@
               <option v-for="item in crawlOptions" :value="item.value" v-text="item.text"></option>
             </select>
           </div>
-          <button class="btn btn-default" v-show="crawlerIsNotBusy" @click="startCrawling">Start crawling</button>
+          <button class="btn btn-default" v-show="!crawlerIsBusy" @click="startCrawling">Start crawling</button>
         </div>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -46,11 +46,15 @@
 export default {
     computed: {
         crawlStatus() {
-        return this.$store.state.crawlStatus
+          return this.$store.state.crawlStatus
         },
-        
-        crawlerIsNotBusy()  {
-           return this.$store.state.crawlStatus != 'busy';
+
+        crawlerIsIdle()  {
+           return this.crawlStatus == 'idle';
+        },
+
+        crawlerIsBusy()  {
+           return this.crawlStatus == 'busy';
         },
 
         crawlClass() {
@@ -80,8 +84,8 @@ export default {
           value: 'default',
           text: 'Default'
         },{
-          value: 'redirect',
-          text: 'Redirects'
+          value: 'insecure',
+          text: 'Insecure'
         }]
       }
     },

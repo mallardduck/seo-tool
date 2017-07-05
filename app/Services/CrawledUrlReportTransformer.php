@@ -18,7 +18,6 @@ class CrawledUrlReportTransformer extends TransformerAbstract
             'h1' => $crawledUrlReport->getH1(),
             'foundOnUrl' => $crawledUrlReport->getFoundOnUrl(),
             'originalHtml' => $crawledUrlReport->getHtml(),
-            'updatedHtml' => $crawledUrlReport->getNewHtml(),
         ];
     }
 }

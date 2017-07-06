@@ -6,9 +6,18 @@ use Spatie\Crawler\CrawlUrl;
 use App\Events\CrawlHasEnded;
 use App\Events\UrlHasBeenCrawled;
 use App\Services\CrawledUrlReport;
+use App\Services\CrawledUrlReportTransformer;
 
 class CrawlObserver implements \Spatie\Crawler\CrawlObserver
 {
+    /** @var \Illuminate\Support\Collection */
+    protected $redirectResults;
+
+    public function __construct()
+    {
+        $this->redirectResults = collect();
+    }
+
     /**
      * Called when the crawler will crawl the url.
      *
@@ -32,6 +41,10 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
     {
         $crawledUrlReport = new CrawledUrlReport($url, $response);
 
+        if ($crawledUrlReport->isRedirect() === true) {
+            $this->redirectResults->push(fractal($crawledUrlReport, new CrawledUrlReportTransformer())->toArray());
+        }
+
         event(new UrlHasBeenCrawled($crawledUrlReport));
     }
 
@@ -43,7 +56,9 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
     public function finishedCrawling()
     {
         \Log::info('crawl has ended');
+        \Log::info('Report output next!');
+        \Log::info( json_encode($this->redirectResults) );
 
-        event(new CrawlHasEnded());
+        event(new CrawlHasEnded($this->redirectResults));
     }
 }

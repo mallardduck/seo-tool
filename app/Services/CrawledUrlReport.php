@@ -26,11 +26,16 @@ class CrawledUrlReport
     protected $foundOnUrl;
 
     /** @var string */
+    protected $nodeType;
+
+    /** @var string */
     protected $originalHtml = '';
 
     /** @var string */
     protected $updatedHtml;
 
+    /** @var boolean */
+    protected $urlRedirects = false;
 
     /**
      * @param \Spatie\Crawler\CrawlUrl  $url
@@ -42,17 +47,19 @@ class CrawledUrlReport
     {
         $this->url = $url;
 
-        $this->response = $response;
-
-        $this->responseBody = $response ? (string) $response->getBody() : '';
-
         $this->foundOnUrl = $url->foundOnUrl;
+
+        $this->response = $response;
 
         if (! is_null($url->node)) {
           $this->originalHtml = $url->node->getHtml();
+          $this->nodeType = $url->node->getNodeType();
         }
 
-        if ($response->hasHeader('X-Guzzle-Redirect-History')) {
+        if ( !is_null($response) && $response->hasHeader('X-Guzzle-Redirect-History')) {
+            $this->urlRedirects = true;
+            $this->responseBody = $response ? (string) $response->getBody() : '';
+            
             $firstUrl = (string) $this->url->url;
             $redirectHistory = collect($response->getHeader('X-Guzzle-Redirect-History'))->reverse()->push((string) $this->url->url)->reverse()->values();
             $redirectStatusHistory = collect($response->getHeader('X-Guzzle-Redirect-Status-History'))
@@ -65,9 +72,12 @@ class CrawledUrlReport
             $this->redirectHistory = $redirectHistory->map(function ($item, $key) use ($redirectStatusHistory) {
                 return ['location' => $item, 'code' => $redirectStatusHistory[$key]];
             });
-
-            $this->updatedHtml = $url->node->getHtmlAndUpdateHref($finalUrl);
         }
+    }
+
+    public function isRedirect(): bool
+    {
+        return $this->urlRedirects;
     }
 
     public function getUrl(): string
@@ -82,6 +92,15 @@ class CrawledUrlReport
         }
 
         return (string) $this->foundOnUrl;
+    }
+
+    public function getNodeType(): string
+    {
+        if (! $this->nodeType) {
+            return '';
+        }
+
+        return (string) $this->nodeType;
     }
 
     public function getStatusCode()

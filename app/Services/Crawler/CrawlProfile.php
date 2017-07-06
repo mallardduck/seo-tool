@@ -8,12 +8,17 @@ class CrawlProfile implements \Spatie\Crawler\CrawlProfile
 {
     public function shouldCrawl(Url $url): bool
     {
-      if (ends_with($url->path, ['.pdf']) || str_contains($url, ['/blog', '/kb', '/anchor', '/storm/api', '/manage'])) {
+      if (ends_with($url->path, ['.pdf']) || str_contains($url, ['/blog/', '/kb/', '/anchor/', '/storm/api', '/manage/'])) {
         return false;
       }
-      if (starts_with($url->host, [
-          'www.liquidweb.com',
+      if (str_contains($url->host, [
+          'grandmascookieblog.com',
+          'new.staging.liquidweb.com',
+          'new.liquidweb.dev',
+          'new.liquidweb.com',
           'liquidweb.com',
+          'www-staging-liquidweb-com.s3.us-east-2.amazonaws.com',
+          'www-staging-liquidweb-com.s3.amazonaws.com',
         ])) {
         return true;
       }

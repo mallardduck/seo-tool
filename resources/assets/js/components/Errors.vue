@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Non 2xx responses</h2>
+        <h3>Non 2xx responses</h3>
         <span>Amount of errors: {{ errors.length }}</span>
 
         <div v-show="hasActiveUrl">
@@ -10,12 +10,14 @@
                 <tr>
                     <td>Status code</td>
                     <td>Url</td>
-                <tr/>
+                    <th>Found On</th>
+                </tr>
 
                 <tr v-for="crawledUrl in errors">
                     <td>{{ crawledUrl.statusCode }}</td>
                     <td>{{ crawledUrl.url }}</td>
-                <tr>
+                    <td>{{ crawledUrl.foundOnUrl }}</td>
+                </tr>
 
             </table>
         </div>

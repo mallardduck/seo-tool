@@ -23,6 +23,7 @@ import Dashboard from './components/Dashboard.vue';
 import LinksDashboard from './components/LinksDashboard.vue';
 import AppHeader from './components/AppHeader.vue';
 import RedirectsLink from './components/RedirectsLink.vue';
+import PageNotFound from './components/PageNotFound.vue';
 
 Vue.component('CrawledList', CrawledList);
 Vue.component('Errors', Errors);
@@ -30,13 +31,27 @@ Vue.component('Dashboard', Dashboard);
 Vue.component('LinksDashboard', LinksDashboard);
 Vue.component('AppHeader', AppHeader);
 Vue.component('RedirectsLink', RedirectsLink);
+Vue.component('PageNotFound', PageNotFound);
 
 Vue.use(VueRouter)
+
+
+var verifyCrawlerState = (to, from, next) => {
+    // ...
+    if (store.state.activeUrl == "") {
+      next({
+        path: '/',
+      })
+    }
+    next() // make sure to always call next()!
+}
+
 const routes = [
     { path: '/', component: Dashboard },
-    { path: '/errors', component: Errors },
-    { path: '/all', component: CrawledList },
-    { path: '/links', component: LinksDashboard }
+    { path: '/errors', component: Errors, beforeEnter: verifyCrawlerState },
+    { path: '/redirects', component: LinksDashboard, beforeEnter: verifyCrawlerState },
+    { path: '/all', component: CrawledList, beforeEnter: verifyCrawlerState },
+    { path: '*', component: PageNotFound}, // Catch all for 404s
 ]
 
 const router = new VueRouter({
@@ -58,4 +73,14 @@ const app = new Vue({
             this.$store.commit('crawlHasEnded');
         });
     },
+    
+    computed: {
+        activeUrl() {
+            return this.$store.state.activeUrl
+        },
+
+        hasActiveUrl() {
+            return this.activeUrl != '';
+        },
+      }
 });

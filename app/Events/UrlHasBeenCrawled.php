@@ -3,11 +3,15 @@
 namespace App\Events;
 
 use App\Services\CrawledUrlReport;
+use Illuminate\Queue\SerializesModels;
 use App\Services\CrawledUrlReportTransformer;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class UrlHasBeenCrawled implements ShouldBroadcast
 {
+
+    use SerializesModels;
+
     /** @var \App\Services\CrawledUrlReport */
     protected $crawledUrlReport;
 

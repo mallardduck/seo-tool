@@ -6,6 +6,8 @@
 
     <div id="app">
         <app-header></app-header>
-        <router-view></router-view>
+        <div class="container-fluid">
+          <router-view></router-view>
+        </div>
     </div>
 @endsection

@@ -27685,6 +27685,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_AppHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_AppHeader_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_RedirectsLink_vue__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_RedirectsLink_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_RedirectsLink_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_PageNotFound_vue__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_PageNotFound_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_PageNotFound_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -27711,15 +27713,28 @@ __webpack_require__(13);
 
 
 
+
 Vue.component('CrawledList', __WEBPACK_IMPORTED_MODULE_4__components_CrawledList_vue___default.a);
 Vue.component('Errors', __WEBPACK_IMPORTED_MODULE_3__components_Errors_vue___default.a);
 Vue.component('Dashboard', __WEBPACK_IMPORTED_MODULE_5__components_Dashboard_vue___default.a);
 Vue.component('LinksDashboard', __WEBPACK_IMPORTED_MODULE_6__components_LinksDashboard_vue___default.a);
 Vue.component('AppHeader', __WEBPACK_IMPORTED_MODULE_7__components_AppHeader_vue___default.a);
 Vue.component('RedirectsLink', __WEBPACK_IMPORTED_MODULE_8__components_RedirectsLink_vue___default.a);
+Vue.component('PageNotFound', __WEBPACK_IMPORTED_MODULE_9__components_PageNotFound_vue___default.a);
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
-var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_5__components_Dashboard_vue___default.a }, { path: '/errors', component: __WEBPACK_IMPORTED_MODULE_3__components_Errors_vue___default.a }, { path: '/redirects', component: __WEBPACK_IMPORTED_MODULE_6__components_LinksDashboard_vue___default.a }, { path: '/all', component: __WEBPACK_IMPORTED_MODULE_4__components_CrawledList_vue___default.a }];
+
+var verifyCrawlerState = function verifyCrawlerState(to, from, next) {
+    // ...
+    if (__WEBPACK_IMPORTED_MODULE_0__store_index__["a" /* default */].state.activeUrl == "") {
+        next({
+            path: '/'
+        });
+    }
+    next(); // make sure to always call next()!
+};
+
+var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_5__components_Dashboard_vue___default.a }, { path: '/errors', component: __WEBPACK_IMPORTED_MODULE_3__components_Errors_vue___default.a, beforeEnter: verifyCrawlerState }, { path: '/redirects', component: __WEBPACK_IMPORTED_MODULE_6__components_LinksDashboard_vue___default.a, beforeEnter: verifyCrawlerState }, { path: '/all', component: __WEBPACK_IMPORTED_MODULE_4__components_CrawledList_vue___default.a, beforeEnter: verifyCrawlerState }, { path: '*', component: __WEBPACK_IMPORTED_MODULE_9__components_PageNotFound_vue___default.a }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
     mode: 'history',
@@ -27741,6 +27756,16 @@ var app = new Vue({
         window.Echo.channel('crawler').listen('CrawlHasEnded', function (event) {
             _this.$store.commit('crawlHasEnded');
         });
+    },
+
+
+    computed: {
+        activeUrl: function activeUrl() {
+            return this.$store.state.activeUrl;
+        },
+        hasActiveUrl: function hasActiveUrl() {
+            return this.activeUrl != '';
+        }
     }
 });
 
@@ -47582,36 +47607,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: {
-        activeUrl: function activeUrl() {
-            return this.$store.state.activeUrl;
-        },
-        hasActiveUrl: function hasActiveUrl() {
-            return this.activeUrl != '';
-        },
         crawlCount: function crawlCount() {
             return this.$store.state.crawledUrls.length;
         },
         crawledUrls: function crawledUrls() {
             return this.$store.state.crawledUrls;
         },
-        crawledAnchorCount: function crawledAnchorCount() {
-            return this.$store.state.crawledAnchors.length;
+        activeUrl: function activeUrl() {
+            return this.$store.state.activeUrl;
         },
-        crawledAnchors: function crawledAnchors() {
-            return this.$store.state.crawledAnchors;
-        },
-        crawledImagesCount: function crawledImagesCount() {
-            return this.$store.state.crawledImages.length;
-        },
-        crawledImages: function crawledImages() {
-            return this.$store.state.crawledImages;
+        hasActiveUrl: function hasActiveUrl() {
+            return this.activeUrl != '';
         }
     }
 });
@@ -47629,10 +47638,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "hasActiveUrl"
     }]
   }, [_c('table', [_vm._m(0), _vm._v(" "), _vm._l((_vm.crawledUrls), function(crawledUrl) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(crawledUrl.statusCode))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(crawledUrl.url))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(crawledUrl.title))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(crawledUrl.h1))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(crawledUrl.contentType))])])
+    return _c('tr', [_c('td', [_vm._v(_vm._s(crawledUrl.statusCode))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(crawledUrl.url))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(crawledUrl.contentType))])])
   })], 2)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('tr', [_c('td', [_vm._v("Status code")]), _vm._v(" "), _c('td', [_vm._v("Url")]), _vm._v(" "), _c('td', [_vm._v("Title")]), _vm._v(" "), _c('td', [_vm._v("H1")]), _vm._v(" "), _c('td', [_vm._v("Content type")])])
+  return _c('tr', [_c('td', [_vm._v("Status code")]), _vm._v(" "), _c('td', [_vm._v("Url")]), _vm._v(" "), _c('td', [_vm._v("Content type")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -47726,8 +47735,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         redirectCount: function redirectCount() {
             return this.$store.getters.redirects.length;
         },
+        hasRedirects: function hasRedirects() {
+            return this.$store.getters.redirects.length >= 1;
+        },
         errorCount: function errorCount() {
             return this.$store.getters.errors.length;
+        },
+        hasErrors: function hasErrors() {
+            return this.$store.getters.errors.length >= 1;
         },
         crawlerIsIdle: function crawlerIsIdle() {
             return this.$store.state.crawlStatus == 'idle';
@@ -47747,21 +47762,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.hasActiveUrl),
       expression: "hasActiveUrl"
     }]
-  }, [_c('span', [_vm._v("Amount of urls crawled: " + _vm._s(_vm.crawlCount))]), _c('br'), _vm._v(" "), _c('span', [_vm._v("Amount of successes: " + _vm._s(_vm.successCount))]), _c('br'), _vm._v(" "), _c('span', [_vm._v("Amount of redirects: " + _vm._s(_vm.redirectCount))]), _c('br'), _vm._v(" "), _c('span', [_vm._v("Amount of errors: " + _vm._s(_vm.errorCount))]), _c('br')]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('links-dashboard', {
+  }, [_c('span', [_vm._v("Amount of urls crawled: " + _vm._s(_vm.crawlCount))]), _c('br'), _vm._v(" "), _c('span', [_vm._v("Amount of successes: " + _vm._s(_vm.successCount))]), _c('br'), _vm._v(" "), _c('span', [_vm._v("Amount of redirects: " + _vm._s(_vm.redirectCount))]), _c('br'), _vm._v(" "), _c('span', [_vm._v("Amount of errors: " + _vm._s(_vm.errorCount))]), _c('br')]), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.hasRedirects) ? _c('links-dashboard', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (!_vm.crawlerIsIdle),
       expression: "!crawlerIsIdle"
     }]
-  }), _vm._v(" "), _c('errors', {
+  }) : _vm._e(), _vm._v(" "), (_vm.hasErrors) ? _c('errors', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (!_vm.crawlerIsIdle),
       expression: "!crawlerIsIdle"
     }]
-  }), _vm._v(" "), _c('span', {
+  }) : _vm._e(), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -48195,10 +48210,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('span', {
     staticClass: "icon-bar"
   })]), _vm._v(" "), _c('a', {
-    staticClass: "navbar-brand",
-    attrs: {
-      "href": "#"
-    }
+    staticClass: "navbar-brand"
   }, [_vm._v("Liquid Web - SEO Tool")])])
 }]}
 module.exports.render._withStripped = true
@@ -48303,6 +48315,83 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(73),
+  /* template */
+  __webpack_require__(74),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/dan/public_html/seo-tool/resources/assets/js/components/PageNotFound.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] PageNotFound.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83c9070c", Component.options)
+  } else {
+    hotAPI.reload("data-v-83c9070c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('h2', [_vm._v("Page Not Found")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-83c9070c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

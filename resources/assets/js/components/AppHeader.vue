@@ -11,7 +11,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Liquid Web - SEO Tool</a>
+        <a class="navbar-brand">Liquid Web - SEO Tool</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->

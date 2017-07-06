@@ -9,16 +9,12 @@
                 <tr>
                     <td>Status code</td>
                     <td>Url</td>
-                    <td>Title</td>
-                    <td>H1</td>
                     <td>Content type</td>
                 </tr>
 
                 <tr v-for="crawledUrl in crawledUrls">
                     <td>{{ crawledUrl.statusCode }}</td>
                     <td>{{ crawledUrl.url }}</td>
-                    <td>{{ crawledUrl.title }}</td>
-                    <td>{{ crawledUrl.h1 }}</td>
                     <td>{{ crawledUrl.contentType }}</td>
                 </tr>
 
@@ -31,6 +27,14 @@
 <script>
     export default {
         computed: {
+            crawlCount () {
+            return this.$store.state.crawledUrls.length;
+            },
+            
+            crawledUrls () {
+            return this.$store.state.crawledUrls;
+            },
+            
             activeUrl() {
                 return this.$store.state.activeUrl
             },
@@ -39,29 +43,6 @@
                 return this.activeUrl != '';
             },
 
-            crawlCount () {
-                return this.$store.state.crawledUrls.length;
-            },
-
-            crawledUrls () {
-                return this.$store.state.crawledUrls;
-            },
-
-            crawledAnchorCount () {
-                return this.$store.state.crawledAnchors.length;
-            },
-
-            crawledAnchors () {
-                return this.$store.state.crawledAnchors;
-            },
-
-            crawledImagesCount () {
-                return this.$store.state.crawledImages.length;
-            },
-
-            crawledImages () {
-                return this.$store.state.crawledImages;
-            },
         },
     }
 </script>

@@ -9,9 +9,9 @@
             <span>Amount of errors: {{ errorCount }}</span><br />
         </div>
         <hr />
-        <links-dashboard v-show="!crawlerIsIdle"></links-dashboard>
+        <links-dashboard v-show="!crawlerIsIdle" v-if="hasRedirects"></links-dashboard>
 
-        <errors v-show="!crawlerIsIdle"></errors>
+        <errors v-show="!crawlerIsIdle" v-if="hasErrors"></errors>
 
         <span v-show="crawlerIsIdle">Crawler is Idle, to begin scan enter domain above and click 'Start crawling'.</span>
 
@@ -40,9 +40,17 @@
             redirectCount () {
             return this.$store.getters.redirects.length;
             },
-            
+
+            hasRedirects() {
+                return (this.$store.getters.redirects.length >= 1);
+            },
+
             errorCount () {
             return this.$store.getters.errors.length;
+            },
+
+            hasErrors() {
+                return (this.$store.getters.errors.length >= 1);
             },
 
             crawlerIsIdle()  {

@@ -31,9 +31,9 @@ class CreateAndSendReport implements ShouldQueue
     public function handle(CrawlHasEnded $event)
     {
         //
-        $event->redirectCollection = $event->redirectCollection
-        ->map(function ($item, $key) {
-            return fractal($item, new CrawledUrlReportTransformer())->toArray();
-        });
+        //$event->redirectCollection = $event->redirectCollection
+        //->map(function ($item, $key) {
+        //    return fractal($item, new CrawledUrlReportTransformer())->toArray();
+        //});
     }
 }

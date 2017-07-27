@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use App\Services\CrawedUrlReportTransformer;
-use PHPUnit_Framework_TestCase;
 use Spatie\Crawler\Url;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit_Framework_TestCase;
 use App\Services\CrawledUrlReport;
+use App\Services\CrawedUrlReportTransformer;
 
 class CrawledUrlReportTransformerTest extends PHPUnit_Framework_TestCase
 {

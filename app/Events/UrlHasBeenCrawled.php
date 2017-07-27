@@ -9,7 +9,6 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class UrlHasBeenCrawled implements ShouldBroadcast
 {
-
     use SerializesModels;
 
     /** @var \App\Services\CrawledUrlReport */

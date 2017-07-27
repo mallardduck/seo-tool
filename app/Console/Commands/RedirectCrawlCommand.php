@@ -49,8 +49,8 @@ class RedirectCrawlCommand extends Command
                     'max'             => 10,        // allow at most 10 redirects.
                     'strict'          => true,      // use "strict" RFC compliant redirects.
                     'referer'         => true,      // add a Referer header
-                    'track_redirects' => true
-                ]
+                    'track_redirects' => true,
+                ],
             ])
             ->setCrawlProfile(new CrawlProfile())
             ->setCrawlObserver(new CrawlObserver())

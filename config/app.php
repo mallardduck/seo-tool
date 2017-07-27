@@ -168,7 +168,6 @@ return [
          */
         Spatie\BladeJavaScript\BladeJavaScriptServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
-        Spatie\Tail\TailServiceProvider::class,
 
         //
 

@@ -57,7 +57,7 @@ class CrawlObserver implements \Spatie\Crawler\CrawlObserver
     {
         \Log::info('crawl has ended');
         \Log::info('Report output next!');
-        \Log::info( json_encode($this->redirectResults) );
+        \Log::info(json_encode($this->redirectResults));
 
         event(new CrawlHasEnded($this->redirectResults));
     }

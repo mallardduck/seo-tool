@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use Spatie\Crawler\Url;
 use Spatie\Crawler\CrawlUrl;
 use InvalidArgumentException;
-use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DomCrawler\Crawler as DomCrawler;
 
 class CrawledUrlReport
@@ -34,7 +32,7 @@ class CrawledUrlReport
     /** @var string */
     protected $updatedHtml;
 
-    /** @var boolean */
+    /** @var bool */
     protected $urlRedirects = false;
 
     /**
@@ -52,14 +50,14 @@ class CrawledUrlReport
         $this->response = $response;
 
         if (! is_null($url->node)) {
-          $this->originalHtml = $url->node->getHtml();
-          $this->nodeType = $url->node->getNodeType();
+            $this->originalHtml = $url->node->getHtml();
+            $this->nodeType = $url->node->getNodeType();
         }
 
-        if ( !is_null($response) && $response->hasHeader('X-Guzzle-Redirect-History')) {
+        if (! is_null($response) && $response->hasHeader('X-Guzzle-Redirect-History')) {
             $this->urlRedirects = true;
             $this->responseBody = $response ? (string) $response->getBody() : '';
-            
+
             $firstUrl = (string) $this->url->url;
             $redirectHistory = collect($response->getHeader('X-Guzzle-Redirect-History'))->reverse()->push((string) $this->url->url)->reverse()->values();
             $redirectStatusHistory = collect($response->getHeader('X-Guzzle-Redirect-Status-History'))

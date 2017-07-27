@@ -8,7 +8,6 @@ use Illuminate\Console\Command;
 use App\Services\Crawler\CrawlProfile;
 use App\Services\Crawler\CrawlObserver;
 
-
 class CrawlInsecureCommand extends Command
 {
     /**
@@ -42,7 +41,7 @@ class CrawlInsecureCommand extends Command
      */
     public function handle()
     {
-      Crawler::create([
+        Crawler::create([
               RequestOptions::CONNECT_TIMEOUT => 10,
               RequestOptions::TIMEOUT => 10,
               RequestOptions::COOKIES => true,
@@ -51,8 +50,8 @@ class CrawlInsecureCommand extends Command
                   'max'             => 10,        // allow at most 10 redirects.
                   'strict'          => true,      // use "strict" RFC compliant redirects.
                   'referer'         => true,      // add a Referer header
-                  'track_redirects' => true
-              ]
+                  'track_redirects' => true,
+              ],
           ])
             ->setCrawlProfile(new CrawlProfile())
             ->setCrawlObserver(new CrawlObserver())

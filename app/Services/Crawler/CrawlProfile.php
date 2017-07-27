@@ -8,19 +8,11 @@ class CrawlProfile implements \Spatie\Crawler\CrawlProfile
 {
     public function shouldCrawl(Url $url): bool
     {
+        $approvedDomains = config('seotool.domains');
         if (ends_with($url->path, ['.pdf']) || str_contains($url, ['/storm/api', '/manage/'])) {
             return false;
         }
-        if (str_contains($url->host, [
-          'grandmascookieblog.com',
-          'new.staging.liquidweb.com',
-          'new.liquidweb.dev',
-          'new.liquidweb.com',
-          'liquidweb.com',
-          'deploytest.staging.liquidweb.com',
-          'www-staging-liquidweb-com.s3.us-east-2.amazonaws.com',
-          'www-staging-liquidweb-com.s3.amazonaws.com',
-        ])) {
+        if (str_contains($url->host, $approvedDomains)) {
             return true;
         }
 

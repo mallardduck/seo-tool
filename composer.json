@@ -7,10 +7,6 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/mallardduck/guzzle"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/mallardduck/crawler"
         }
     ],

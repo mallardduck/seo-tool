@@ -20,6 +20,7 @@ cache:
 before_script:
 #  - ./tests/server/start_server.sh
 #  - sleep 5 # give server some time to start
+  - composer config github-oauth.github.com ${GITHUB_TOKEN}
   - travis_retry composer self-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 

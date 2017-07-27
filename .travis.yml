@@ -10,7 +10,12 @@ node_js:
 
 env:
   matrix:
+    - COMPOSER_FLAGS="--prefer-lowest"
     - COMPOSER_FLAGS=""
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
 
 before_script:
 #  - ./tests/server/start_server.sh
